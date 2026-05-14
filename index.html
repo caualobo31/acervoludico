@@ -45,9 +45,7 @@
         .section { padding: 60px 0; }
         @media (min-width: 768px) { .section { padding: 88px 0; } }
 
-        .fade { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease-out, transform 0.55s ease-out; }
-        .fade.in { opacity: 1; transform: none; }
-        @media (prefers-reduced-motion: reduce) { .fade { opacity: 1; transform: none; transition: none; } }
+        .fade { opacity: 1; transform: none; }
 
         /* typography */
         .sec-headline {
@@ -625,9 +623,10 @@
                     <span>PDF para imprimir</span>
                 </div>
 
-                <div class="scroll-hint">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </div>
+            </div>
+
+            <div class="scroll-hint">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </div>
 
         </div>
@@ -910,16 +909,6 @@
 </footer>
 
 <script>
-    // fade-in on scroll
-    const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-            if (e.isIntersecting) {
-                e.target.classList.add('in');
-                obs.unobserve(e.target);
-            }
-        });
-    }, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
-    document.querySelectorAll('.fade').forEach(el => obs.observe(el));
 </script>
 
 </body>
