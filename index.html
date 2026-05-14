@@ -203,6 +203,17 @@
         }
         .cta-meta-dot { color: #CBD5E0; }
 
+        .scroll-hint {
+            margin-top: 32px;
+            color: rgba(108,92,231,0.35);
+            animation: bounce-hint 1.8s ease-in-out infinite;
+        }
+        @keyframes bounce-hint {
+            0%, 100% { transform: translateY(0); }
+            50%       { transform: translateY(6px); }
+        }
+        @media (prefers-reduced-motion: reduce) { .scroll-hint { animation: none; } }
+
         /* mockup */
         .mockup-wrap { display: flex; justify-content: center; align-items: center; }
         .hero-mockup-img {
@@ -591,8 +602,8 @@
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                     Oferta exclusiva · apenas nesta página
                 </div>
-                <h2 class="hero-h1">Complete sua pasta com <span class="kw">60 recursos lúdicos</span> para Fono Infantil</h2>
-                <p class="hero-sub">Leve jogos, atividades e materiais imprimíveis para complementar suas sessões com mais variedade, apoio visual e praticidade.</p>
+                <h2 class="hero-h1">Complete sua pasta com <span class="kw">+60 recursos lúdicos</span> para Fono Infantil</h2>
+                <p class="hero-sub">Jogos, atividades e materiais imprimíveis para complementar suas sessões com mais praticidade.</p>
 
                 <img
                     src="mockup hero.png"
@@ -612,6 +623,10 @@
                     <span>Acesso imediato</span>
                     <span class="cta-meta-dot">·</span>
                     <span>PDF para imprimir</span>
+                </div>
+
+                <div class="scroll-hint">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </div>
             </div>
 
