@@ -517,6 +517,106 @@
         }
         .cta-recusa:hover { color: var(--text); }
 
+        /* ── POPUP RECUSA ── */
+        .popup-overlay {
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.52);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+            opacity: 0; visibility: hidden;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+        }
+        .popup-overlay.open { opacity: 1; visibility: visible; }
+        .popup-box {
+            background: #fff;
+            border-radius: var(--r-xl);
+            padding: 40px 32px 32px;
+            max-width: 460px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+            position: relative;
+            text-align: center;
+            transform: scale(0.94);
+            transition: transform 0.25s ease;
+        }
+        .popup-overlay.open .popup-box { transform: scale(1); }
+        @media (max-width: 480px) { .popup-box { padding: 36px 20px 28px; } }
+
+        .popup-close {
+            position: absolute; top: 14px; right: 14px;
+            width: 32px; height: 32px; border-radius: 50%;
+            background: none; border: none; cursor: pointer;
+            color: #B2BEC3; display: flex; align-items: center; justify-content: center;
+            transition: background 0.15s, color 0.15s;
+        }
+        .popup-close:hover { background: #F0EFFF; color: var(--text); }
+
+        .popup-icon {
+            width: 52px; height: 52px; border-radius: 50%;
+            background: #FEF3C7; margin: 0 auto 16px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .popup-badge {
+            display: inline-block;
+            background: #FEF3C7; color: #92400E;
+            font-size: 11px; font-weight: 700;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            padding: 5px 14px; border-radius: 100px;
+            border: 1px solid #FCD34D;
+            margin-bottom: 14px;
+        }
+        .popup-title {
+            font-family: var(--font-head);
+            font-weight: 800;
+            font-size: clamp(18px, 4vw, 24px);
+            color: var(--text);
+            line-height: 1.25;
+            margin-bottom: 12px;
+        }
+        .popup-body {
+            font-size: 15px; color: var(--muted);
+            line-height: 1.7; margin-bottom: 20px;
+        }
+        .popup-email-box {
+            background: #F0EFFF;
+            border: 1px solid rgba(108,92,231,0.15);
+            border-radius: var(--r-lg);
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            text-align: left;
+        }
+        .popup-email-title {
+            font-weight: 700; font-size: 14px;
+            color: var(--primary); margin-bottom: 6px;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .popup-email-text {
+            font-size: 13px; color: var(--muted); line-height: 1.65;
+        }
+        .popup-email-text a {
+            color: var(--primary); font-weight: 600; text-decoration: underline;
+        }
+        .popup-cta-sim {
+            display: block; width: 100%;
+            background: var(--cta); color: #fff;
+            font-family: var(--font-head); font-weight: 700; font-size: 16px;
+            padding: 18px; border: none; border-radius: var(--r-md);
+            cursor: pointer; text-decoration: none;
+            box-shadow: 0 4px 18px rgba(255,107,107,0.35);
+            transition: background 0.2s, transform 0.2s;
+            margin-bottom: 12px;
+        }
+        .popup-cta-sim:hover { background: var(--cta-hover); transform: translateY(-1px); }
+        .popup-cta-nao {
+            display: inline-block; font-size: 13px;
+            color: var(--muted); text-decoration: underline;
+            text-underline-offset: 2px; cursor: pointer;
+            background: none; border: none;
+            font-family: var(--font-body); transition: color 0.15s;
+        }
+        .popup-cta-nao:hover { color: var(--text); }
+
         /* ── GARANTIA ── */
         #garantia { background: #fff; padding: 52px 0; }
 
@@ -873,7 +973,7 @@
             <a href="https://ggcheckout.app/checkout/v4/SBEPTkPnYUpvELJMERYR" class="cta-primary cta-block pulse">SIM, QUERO ADICIONAR AO MEU PEDIDO</a>
 
             <!-- LINK: substituir href="#" pelo link de recusa / downsell / acesso direto ao FonoKids -->
-            <div><a href="#" class="cta-recusa">Não, obrigada. Quero acessar apenas o FonoKids.</a></div>
+            <div><button class="cta-recusa" id="btn-recusa">Não, obrigada. Quero acessar apenas o FonoKids.</button></div>
         </div>
     </div>
 </section>
@@ -909,7 +1009,50 @@
     </p>
 </footer>
 
+<!-- ── POPUP RECUSA ── -->
+<div class="popup-overlay" id="popup-recusa">
+    <div class="popup-box">
+        <button class="popup-close" id="popup-fechar" aria-label="Fechar">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+
+        <div class="popup-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+        </div>
+
+        <div class="popup-badge">Atenção</div>
+        <h3 class="popup-title">Essa oferta não vai durar para sempre</h3>
+        <p class="popup-body">Esta condição especial está disponível <strong>apenas nesta página</strong> e não será repetida. Se fechar agora, você perderá o preço de R$47,00.</p>
+
+        <div class="popup-email-box">
+            <div class="popup-email-title">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                Seu acesso ao FonoKids foi enviado
+            </div>
+            <p class="popup-email-text">
+                Verifique sua <strong>caixa de entrada e o SPAM</strong>. O e-mail com o acesso foi enviado logo após a confirmação do pagamento.<br><br>
+                Dúvidas? Fale com a gente: <a href="mailto:contatolbgomes@gmail.com">contatolbgomes@gmail.com</a>
+            </p>
+        </div>
+
+        <a href="https://ggcheckout.app/checkout/v4/SBEPTkPnYUpvELJMERYR" class="popup-cta-sim">Sim, quero aproveitar o Kit por R$47</a>
+        <button class="popup-cta-nao" id="popup-confirmar-recusa">Não, obrigada. Só quero o FonoKids.</button>
+    </div>
+</div>
+
 <script>
+    const popup   = document.getElementById('popup-recusa');
+    const btnOpen = document.getElementById('btn-recusa');
+    const btnClose = document.getElementById('popup-fechar');
+    const btnNao  = document.getElementById('popup-confirmar-recusa');
+
+    function openPopup()  { popup.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closePopup() { popup.classList.remove('open'); document.body.style.overflow = ''; }
+
+    btnOpen.addEventListener('click', openPopup);
+    btnClose.addEventListener('click', closePopup);
+    btnNao.addEventListener('click', closePopup);
+    popup.addEventListener('click', (e) => { if (e.target === popup) closePopup(); });
 </script>
 
 </body>
